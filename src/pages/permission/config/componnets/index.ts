@@ -1,0 +1,5 @@
+export { RoleAuthorizeDialog } from './RoleAuthorizeDialog'
+export { RoleCreateDialog } from './RoleCreateDialog'
+export { RoleModifyDialog } from './RoleModifyDialog'
+export { RoleSearch } from './RoleSearch'
+export { RoleTable } from './RoleTable'
