@@ -28,10 +28,14 @@ export const RoleTable = ({ onCreate, onModify, onAuthorize }: RoleTableProps) =
 
   useEffect(() => {
     const initData = async () => {
-      const { result, status } = await apiGetRoleList()
-      // console.log('result: ', result)
-      if (status) {
-        setTableData(result)
+      try {
+        const { data, success } = await apiGetRoleList()
+        // console.log('data: ', data)
+        if (success) {
+          setTableData(data)
+        }
+      } catch (e) {
+        console.log(e)
       }
     }
     initData()

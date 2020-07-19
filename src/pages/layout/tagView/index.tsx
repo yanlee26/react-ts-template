@@ -32,26 +32,16 @@ const TagsView = () => {
     if (menuList.length) {
       const menu = menuList.find(m => m.path === location.pathname)
       if (menu) {
-        // Initializes dashboard page.
-        const dashboard = menuList[0]
+        // Initializes the tag generated for the current page
+        // Duplicate tag will be ignored in redux.
         dispatch(
           addTag({
-            path: dashboard.path,
-            label: dashboard.label,
-            id: dashboard.key,
-            closable: false
+            path: menu.path,
+            label: menu.label,
+            id: menu.key,
+            closable: true
           })
-        ),
-          // Initializes the tag generated for the current page
-          // Duplicate tag will be ignored in redux.
-          dispatch(
-            addTag({
-              path: menu.path,
-              label: menu.label,
-              id: menu.key,
-              closable: true
-            })
-          )
+        )
       }
     }
   }, [dispatch, location.pathname, menuList])

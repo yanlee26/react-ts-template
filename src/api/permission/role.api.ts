@@ -1,5 +1,5 @@
-import { request } from 'utils/request'
+import { get } from 'utils/request'
 import { GetRoleResult } from 'interface/permission/role.interface'
 
 /** get role list api */
-export const apiGetRoleList = () => request<GetRoleResult>('get', '/permission/role')
+export const apiGetRoleList = () => get<GetRoleResult>('/permission/role')

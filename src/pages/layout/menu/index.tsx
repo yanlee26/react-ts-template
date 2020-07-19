@@ -6,7 +6,7 @@ import { Menu } from 'antd'
 import { selectGlobal } from 'store/globalSlice'
 import { MenuList } from 'interface/layout/menu.interface'
 import { CustomIcon } from 'components/customIcon'
-import { addTag } from './tagView/tagViewSlice'
+import { addTag } from '../tagView/tagViewSlice'
 
 const { SubMenu, Item } = Menu
 

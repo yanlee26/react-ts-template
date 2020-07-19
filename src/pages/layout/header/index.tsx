@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogoutOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 
-import { HeaderNotice } from './HeaderNotice'
 import Avator from 'assets/header/avator.jpeg'
 import ReactSvg from 'assets/logo/react.svg'
 import AntdSvg from 'assets/logo/antd.svg'
 import { logoutAsync, selectUser } from 'store/userSlice'
 
-import { LayoutHeader } from './style'
+import { LayoutHeader } from '../style'
 
 interface Props {
   collapsed: boolean
@@ -69,11 +68,10 @@ export const HeaderContainer = ({ collapsed, toggle }: Props) => {
           <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span>
         </div>
         <div className="actions">
-          <HeaderNotice />
           {logged ? (
             <Dropdown overlay={menu} trigger={['click']}>
               <span className="user-action">
-                <img src={Avator} className="user-avator" />
+                <img src={Avator} alt="Avator" className="user-avator" />
               </span>
             </Dropdown>
           ) : (

@@ -1,1 +1,1 @@
-export { UnAuthorized } from './UnAuthorized'
+export * from './UnAuthorized'

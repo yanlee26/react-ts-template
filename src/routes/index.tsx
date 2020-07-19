@@ -4,22 +4,21 @@ import { useRoutes, Route } from 'react-router-dom'
 import Dashboard from 'pages/dashboard'
 import LoginPage from 'pages/login'
 import LayoutPage from 'pages/layout'
-import { UnAuthorized } from 'components/UnExpection'
+import { UnAuthorized } from 'components/unExpection'
 
 const NotFound = lazy(() => import('pages/404'))
 const Documentation = lazy(() => import('pages/doucumentation'))
 const PermissionConfig = lazy(() => import('pages/permission/config'))
 const AccountPage = lazy(() => import('pages/account'))
 
-interface CustomRouterObjectChildren {
+type ListNode = {
   path: string
   auth?: boolean
   element?: ReactChild
+  children?: ListNode[]
 }
-interface CustomRouterObject extends CustomRouterObjectChildren {
-  children?: CustomRouterObjectChildren[]
-}
-type RouteListType = CustomRouterObject[]
+
+type RouteListType = ListNode[]
 
 const routeList: RouteListType = [
   {
@@ -60,7 +59,7 @@ const RenderRouter = () => {
     function convertMenuToRoute(list: RouteListType): RouteListType {
       return list.map(({ path, auth, element: Ele, children }) => {
         // console.log('auth: ', auth) // 权限相关, 据业务而定
-        const item: CustomRouterObject = { path }
+        const item: ListNode = { path }
 
         item.element = !auth ? <Route element={Ele as any} /> : <UnAuthorized />
         if (children) {

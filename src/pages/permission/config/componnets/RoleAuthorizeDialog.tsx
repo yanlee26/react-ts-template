@@ -25,12 +25,12 @@ export const RoleAuthorizeDialog = ({ onAuthorize, onCancel, visible, values }: 
   }
 
   const initData = useCallback(async () => {
-    const { result, status } = await getMenuList()
+    const { success, data } = await getMenuList()
     // console.log('result: ', result)
-    if (status) {
+    if (success) {
       // format
       setTreeData(
-        result.map(a => ({
+        data.map(a => ({
           title: a.label,
           key: a.key,
           children: a.children?.map(b => ({

@@ -26,14 +26,18 @@ export const HeaderNotice = () => {
   useEffect(() => {
     const getNotice = async () => {
       setLoading(true)
-      const { status, result } = await getNoticeList()
-      setLoading(false)
-      status && setNoticeList(result)
-      dispatch(
-        setNoticeCount({
-          noticeCount: result.length
-        })
-      )
+      try {
+        const { success, data } = await getNoticeList()
+        setLoading(false)
+        success && setNoticeList(data)
+        dispatch(
+          setNoticeCount({
+            noticeCount: data.length
+          })
+        )
+      } catch (e) {
+        setLoading(false)
+      }
     }
     getNotice()
   }, [dispatch])
