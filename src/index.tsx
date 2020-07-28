@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-
 import store from './store'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
+import 'antd-mobile/dist/antd-mobile.css';  
 import './mock'
 
 const render = (Router: React.FC) => {

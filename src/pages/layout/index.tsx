@@ -49,13 +49,8 @@ const LayoutPage = () => {
 
   return (
     <LayoutContainer>
-      <HeaderContainer collapsed={collapsed} toggle={toggle} />
       <Layout>
-        <Sider className="layout-page-sider" trigger={null} collapsible collapsed={collapsed} breakpoint="md">
-          <MenuContainer menuList={menuList} />
-        </Sider>
         <Content className="layout-page-content">
-          <TagsView />
           <Suspense fallback={<FallbackLoading />}>
             <Outlet />
           </Suspense>

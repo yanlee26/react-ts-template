@@ -1,15 +1,21 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter,Link } from 'react-router-dom'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
-
-// import moment from 'moment'
-// import 'moment/locale/zh-cn'
 
 import { GlobalStyle } from './style'
 import RenderRouter from './routes'
 
-// moment.locale('zh-cn')
+function TabBar() {
+  return (
+    <div className="tabbar">
+      <Link className="tabbar-item" to="/dashboard">dashboard</Link>
+      <Link className="tabbar-item" to="/account">account</Link>
+      <Link className="tabbar-item" to="/permission">permission</Link>
+      <Link className="tabbar-item" to="/login">login</Link>
+    </div>
+  )
+}
 
 const App: React.FC = () => {
   return (
@@ -17,6 +23,8 @@ const App: React.FC = () => {
       <BrowserRouter>
         <GlobalStyle />
         <RenderRouter />
+        {/* {renderRoutes(routeList)} */}
+        <TabBar />
       </BrowserRouter>
     </ConfigProvider>
   )
