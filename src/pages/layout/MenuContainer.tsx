@@ -6,7 +6,7 @@ import { Menu } from 'antd'
 import { selectGlobal } from 'store/globalSlice'
 import { MenuList } from 'interface/layout/menu.interface'
 import { CustomIcon } from 'components/customIcon'
-import { addTag } from '../tagView/tagViewSlice'
+import { addTag } from './tagView/tagViewSlice'
 
 const { SubMenu, Item } = Menu
 
@@ -58,8 +58,8 @@ export const MenuContainer = ({ menuList }: Props) => {
       selectedKeys={selectedKeys}
       openKeys={openKeys}
       onOpenChange={keys => {
-        const tail = (keys as Array<any>).pop()
-        setOpenkeys(tail)
+        const items = (keys as Array<any>).pop()
+        setOpenkeys(items)
       }}
     >
       {menuList?.map(menu =>

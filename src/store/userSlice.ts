@@ -45,16 +45,16 @@ export default userSlice.reducer
 export const selectUser = (state: { user: UserState }) => state.user
 
 export const loginAsync = (payload: LoginParams): AppThunk => async dispatch => {
-  const { data, success } = await apiLogin(payload)
-  console.log('data: ', data)
+  const { result, status } = await apiLogin(payload)
+  console.log('result: ', result)
 
-  if (success) {
-    localStorage.setItem('t', data.token)
-    localStorage.setItem('username', data.username)
+  if (status) {
+    localStorage.setItem('t', result.token)
+    localStorage.setItem('username', result.username)
     dispatch(
       setUserItem({
         logged: true,
-        username: data.username
+        username: result.username
       })
     )
     return true
@@ -63,9 +63,9 @@ export const loginAsync = (payload: LoginParams): AppThunk => async dispatch => 
 }
 
 export const logoutAsync = (): AppThunk => async dispatch => {
-  const { success } = await apiLogout({ token: localStorage.getItem('t')! })
+  const { status } = await apiLogout({ token: localStorage.getItem('t')! })
   // 根据具体业务而定
-  if (success) {
+  if (status) {
     localStorage.clear()
     dispatch(
       setUserItem({

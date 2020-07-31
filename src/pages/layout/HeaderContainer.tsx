@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogoutOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 
+import { HeaderNotice } from './HeaderNotice'
 import Avator from 'assets/header/avator.jpeg'
 import ReactSvg from 'assets/logo/react.svg'
 import AntdSvg from 'assets/logo/antd.svg'
 import { logoutAsync, selectUser } from 'store/userSlice'
 
-import { LayoutHeader } from '../style'
+import { LayoutHeader } from './style'
 
 interface Props {
   collapsed: boolean
@@ -60,14 +61,15 @@ export const HeaderContainer = ({ collapsed, toggle }: Props) => {
   return (
     <LayoutHeader>
       <div className="logo" style={{ width: collapsed ? 80 : 200 }}>
-        <img src={ReactSvg} alt="" style={{ marginRight: collapsed ? '2px' : '20px' }} />
-        <img src={AntdSvg} alt="" />
+        <img src={ReactSvg} alt="ReactSvg" style={{ marginRight: collapsed ? '2px' : '20px' }} />
+        <img src={AntdSvg} alt="AntdSvg" />
       </div>
       <div className="layout-page-header-main">
         <div onClick={toggle}>
           <span id="sidebar-trigger">{collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}</span>
         </div>
         <div className="actions">
+          <HeaderNotice />
           {logged ? (
             <Dropdown overlay={menu} trigger={['click']}>
               <span className="user-action">

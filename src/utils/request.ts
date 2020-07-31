@@ -1,16 +1,10 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import { message as $message } from 'antd'
-import { BASE_URLS } from 'config'
 
 axios.defaults.timeout = 6000
-axios.defaults.baseURL = BASE_URLS[process.env.REACT_APP_ENV!]
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 axios.interceptors.request.use(
   config => {
-    // TODO:
-    // const token = store.state.token;
-    //     token && (config.headers.Authorization = token);
     return config
   },
   error => {
@@ -19,64 +13,58 @@ axios.interceptors.request.use(
 )
 
 axios.interceptors.response.use(
-  res => {
-    if (res?.data?.success) {
-      // $message.success(res.data.message)
+  config => {
+    if (config?.data?.message) {
+      // $message.success(config.data.message)
     }
-    if (res.status === 200) {
-      return Promise.resolve(res.data)
-    } else {
-      return Promise.reject(res)
-    }
+    return config?.data
   },
   error => {
     let errorMessage = '系统异常'
-    if (error.response?.status) {
-      // 业务
-      console.log(error.response.status)
-      switch (error.response.status) {
-        case 401: {
-          errorMessage = '未授权'
-          break
-        }
-        case 404: {
-          errorMessage = '资源不存在'
-          break
-        }
-        case 500: {
-          errorMessage = '服务端异常'
-          break
-        }
-        default:
-          break
-      }
+    if (error?.message?.includes('Network Error')) {
+      errorMessage = '网络错误，请检查您的网络'
     }
-
+    console.dir(error)
     error.message && $message.error(errorMessage)
     return {
-      success: false,
+      status: false,
       message: errorMessage,
-      data: null
+      result: null
     }
   }
 )
 
-export type Response<T = any, U = any> = {
-  success: boolean
+export type Response<T = any> = {
+  status: boolean
   message: string
-  code: string
-  data: T
-  errors: U
+  result: T
 }
 
-export type ResponseType<T = any> = Promise<Response<T>>
+type Method = 'get' | 'post'
 
-export const get = <T = any>(url: string, params?: any): ResponseType<T> => {
-  return axios.get(url, {
-    params
-  })
-}
+export type MyResponse<T = any> = Promise<Response<T>>
 
-export const post = <T = any>(url: string, data?: any): ResponseType<T> => {
-  return axios.post(url, data)
+/**
+ *
+ * @param method - request methods
+ * @param url - request url
+ * @param data - request data or params
+ */
+export const request = <T = any>(
+  method: Method,
+  url: string,
+  data?: any,
+  config?: AxiosRequestConfig
+): MyResponse<T> => {
+  // const prefix = '/api'
+  const prefix = ''
+  url = prefix + url
+  if (method === 'post') {
+    return axios.post(url, data, config)
+  } else {
+    return axios.get(url, {
+      params: data,
+      ...config
+    })
+  }
 }

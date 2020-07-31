@@ -23,7 +23,7 @@ export const menuList: MenuList = [
     path: '/permission',
     children: [
       {
-        name: 'permissionConfig',
+        name: 'buttonPermission',
         label: '权限配置',
         key: '2-1',
         path: '/permission/config'
