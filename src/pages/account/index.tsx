@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import { flex } from 'assets/common-styled'
 
-import { DatePicker } from 'components/date'
 
 const StyledAccount = styled.div`
   ${flex.flex};
@@ -13,7 +12,7 @@ const StyledAccount = styled.div`
 export default function Account() {
   return (
     <StyledAccount>
-      <DatePicker />
+      Account
     </StyledAccount>
   )
 }
