@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import 'antd/dist/antd.min.css'
 
 import store from './store'
 import * as serviceWorker from './serviceWorker'

@@ -61,7 +61,7 @@ const RenderRouter = () => {
         // console.log('auth: ', auth) // 权限相关, 据业务而定
         const item: ListNode = { path }
 
-        item.element = !auth ? <Route element={Ele as any} /> : <UnAuthorized />
+        item.element =  <Route element={!auth  ? Ele as any : <UnAuthorized />} /> 
         if (children) {
           item.children = convertMenuToRoute(children)
         }
